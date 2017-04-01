@@ -303,7 +303,7 @@ end
 cursed_world.slovly_search_target_location = function(pos, owner)
     local pos_target = {x=pos.x, y=cursed_world.location_y, z=pos.z};
     --if already in cursed_world, then make portal to surface
-    if math.abs(pos.y - cursed_world.location_y) < 32 then
+    if math.abs(pos.y - cursed_world.location_y) < 250 then
         pos_target.y = 0;
     end
 
