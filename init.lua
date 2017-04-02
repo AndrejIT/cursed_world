@@ -84,7 +84,7 @@ function cursed_world.animate2(pos)
 end
 
 function cursed_world.teleportate(parameters)
-    local pos1,pos2,playername,id = parameters[1],parameters[2],parameters[3],parameters[4]
+    local pos1,pos2,playername,portal_id = parameters[1],parameters[2],parameters[3],parameters[4]
     local player = minetest.get_player_by_name(playername)
     if player:is_player() and playername~=cursed_world.lastplayername then
         local pos = player:getpos()
@@ -98,9 +98,9 @@ function cursed_world.teleportate(parameters)
         end
     end
 end
-function cursed_world.start_teleporting(pos1, pos2, playername)
+function cursed_world.start_teleporting(pos1, pos2, playername, portal_id)
     cursed_world.animate2(pos1, playername)
-    minetest.after(3.0, cursed_world.teleportate, {pos1, pos2, playername, id})
+    minetest.after(3.0, cursed_world.teleportate, {pos1, pos2, playername, portal_id})
 end
 
 function cursed_world.shatter_portal(id)
@@ -142,7 +142,7 @@ cursed_world.portals_working = function()
         if #objectsnear>0 then
             local player = objectsnear[1];
             if player:is_player() and player:get_player_name()~=cursed_world.lastplayername then
-                cursed_world.start_teleporting(pos, pos_target, player:get_player_name())
+                cursed_world.start_teleporting(pos, pos_target, player:get_player_name(), id)
                 if player:get_player_name() ~= portal.owner then
                     cursed_world.shatter_portal(id)
                 end
