@@ -1,6 +1,7 @@
 cursed_world = {}
 cursed_world.portals = {}
 cursed_world.location_y = -4800;
+cursed_world.dimension_y = 250; --"thikness" of cursed_world
 cursed_world.lastplayername =""
 cursed_world.filename = minetest.get_worldpath() .. "/cursed_world_portals.txt"
 
@@ -303,8 +304,8 @@ end
 cursed_world.slovly_search_target_location = function(pos, owner)
     local pos_target = {x=pos.x, y=cursed_world.location_y, z=pos.z};
     --if already in cursed_world, then make portal to surface
-    if math.abs(pos.y - cursed_world.location_y) < 250 then
-        pos_target.y = 0;
+    if math.abs(pos.y - cursed_world.location_y) < cursed_world.dimension_y then
+        pos_target.y = pos.y - cursed_world.location_y;
     end
 
     local n = 0;
@@ -346,7 +347,7 @@ minetest.register_craft({
 })
 
 --depending on what "mobs" mod version is used, mob name will be different
-if mobs then
+if _G['mobs'] then   --check global table for mobs mod
     mobs:register_spawn("mobs:oerkki", "cursed_world:cursed_stone", 4, -1, 2, 40, 500, -500);
 end
 
