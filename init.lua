@@ -348,7 +348,7 @@ minetest.register_craft({
 
 --depending on what "mobs" mod version is used, mob name will be different
 if _G['mobs'] then   --check global table for mobs mod
-    mobs:register_spawn("mobs:oerkki", "cursed_world:cursed_stone", 4, -1, 2, 40);
+    mobs:register_spawn("mobs:oerkki", "cursed_world:cursed_stone", -1, 4, 2, 40);
 end
 
 --convert all old nodes
