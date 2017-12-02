@@ -87,7 +87,7 @@ end
 function cursed_world.teleportate(parameters)
     local pos1,pos2,playername,portal_id = parameters[1],parameters[2],parameters[3],parameters[4]
     local player = minetest.get_player_by_name(playername)
-    if player:is_player() and playername~=cursed_world.lastplayername then
+    if player and player:is_player() and playername~=cursed_world.lastplayername then
         local pos = player:getpos()
         if vector.distance(pos, {x=pos1.x,y=pos1.y-1,z=pos1.z}) < 1.7 then
             if math.random(1, 100) > 5 then
@@ -348,7 +348,7 @@ minetest.register_craft({
 
 --depending on what "mobs" mod version is used, mob name will be different
 if _G['mobs'] then   --check global table for mobs mod
-    mobs:register_spawn("mobs:oerkki", "cursed_world:cursed_stone", -1, 4, 2, 40);
+    mobs:register_spawn("mobs:oerkki", "cursed_world:cursed_stone", -1, 4, 2, 12);
 end
 
 --convert all old nodes
