@@ -41,7 +41,7 @@ function cursed_world.animate1(pos)
     end
     minetest.add_particlespawner({
     	amount = 80,
-    	time = 10,
+    	time = 4,
     	minpos = {x=pos.x-xd, y=pos.y-1.5, z=pos.z-zd},
     	maxpos = {x=pos.x+xd, y=pos.y+1.5, z=pos.z+zd},
     	minvel = {x=0, y=-1, z=0},
@@ -142,6 +142,10 @@ cursed_world.portals_working = function()
         local objectsnear=minetest.get_objects_inside_radius({x=pos.x,y=pos.y-1,z=pos.z}, 1.7);
         if #objectsnear>0 then
             local player = objectsnear[1];
+            -- check only first two objekts then give up
+            if #objectsnear>1 and not player:is_player() then
+                player = objectsnear[2];
+            end
             if player:is_player() and player:get_player_name()~=cursed_world.lastplayername then
                 cursed_world.start_teleporting(pos, pos_target, player:get_player_name(), id)
                 if player:get_player_name() ~= portal.owner then
@@ -154,7 +158,7 @@ cursed_world.portals_working = function()
     end
 
     --recursion to itself
-    minetest.after(10, function()
+    minetest.after(4, function()
         cursed_world.portals_working()
     end)
 end
