@@ -88,13 +88,13 @@ function cursed_world.teleportate(parameters)
     local pos1,pos2,playername,portal_id = parameters[1],parameters[2],parameters[3],parameters[4]
     local player = minetest.get_player_by_name(playername)
     if player and player:is_player() and playername~=cursed_world.lastplayername then
-        local pos = player:getpos()
+        local pos = player:get_pos()
         if vector.distance(pos, {x=pos1.x,y=pos1.y-1,z=pos1.z}) < 1.7 then
             if math.random(1, 100) > 5 then
                 cursed_world.lastplayername = playername
-                player:setpos({x=pos2.x,y=pos2.y+0.5,z=pos2.z})
+                player:set_pos({x=pos2.x,y=pos2.y+0.5,z=pos2.z})
             else
-                player:setpos({x=pos2.x-5+math.random(1, 10),y=pos2.y+3,z=pos2.z-5+math.random(1, 10)})
+                player:set_pos({x=pos2.x-5+math.random(1, 10),y=pos2.y+3,z=pos2.z-5+math.random(1, 10)})
             end
         end
     end
